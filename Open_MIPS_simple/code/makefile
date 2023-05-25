@@ -4,12 +4,15 @@ all:
 	make get_rom
 	make translate
 
-comp: inst_rom.S
-	mips-linux-gnu-as -mips32 inst_rom.S -o inst_rom.o
+comp:
+	mips-sde-elf-as -mips32 inst_rom.S -o inst_rom.o
+
 connect: 
-	mips-linux-gnu-ld -T ram.ld inst_rom.o -o inst_rom.om
+	mips-sde-elf-ld -T ram.ld inst_rom.o -o inst_rom.om
+
 get_rom:
-	mips-linux-gnu-objcopy -O binary inst_rom.om inst_rom.bin
+	mips-sde-elf-objcopy -O binary inst_rom.om inst_rom.bin
+
 translate:
 	./bin_to_mem.py
 
