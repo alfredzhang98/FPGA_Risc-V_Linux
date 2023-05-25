@@ -10,11 +10,11 @@ module openmips(
 
 //************definitions******************//
 //connection between pc_reg and if_id
-wire [`InstAddrBus]     if_pc;
+
 wire                    ce;
 
 //connection between if_id and id
-
+wire [`InstAddrBus]     id_pc;
 wire [`InstBus]         id_inst;
 
 //connection between id and id_ex
@@ -69,7 +69,7 @@ wire      [`RegAddrBus]           reg2_addr_o ;
 pc_reg pc_reg_inst(
         .clk    (clk)   ,
         .rst    (rst)   ,
-        .pc     (if_pc)    ,
+        .pc     (rom_addr_o)    ,
         .ce     (rom_ce_o)
 
     );
@@ -78,9 +78,9 @@ pc_reg pc_reg_inst(
 if_id if_id_inst(
         .clk     (clk),
         .rst     (rst),
-        .if_pc   (if_pc),
+        .if_pc   (rom_addr_o),
         .if_inst (rom_data_i),
-        .id_pc   (rom_addr_o),
+        .id_pc   (id_pc),
         .id_inst (id_inst)
 
 
@@ -91,18 +91,21 @@ id id_inst0(
     .rst         (rst),
 
     //from if_id
-    .pc_i       (rom_addr_o),
+    .pc_i       (id_pc),
     .inst_i     (id_inst),
 
     //from regfile
-    .reg1_data_i ,
-    .reg2_data_i ,
+    .reg1_data_i (reg1_data_i),
+    .reg2_data_i (reg2_data_i),
+
+
+
 
     //output to regfile
-    .reg1_read_o ,
-    .reg2_read_o ,
-    .reg1_addr_o ,
-    .reg2_addr_o ,
+    .reg1_read_o (reg1_read_o),
+    .reg2_read_o (reg2_read_o),
+    .reg1_addr_o (reg1_addr_o),
+    .reg2_addr_o (reg2_addr_o),
 
     //to ex
     .aluop_o    (id_aluop),

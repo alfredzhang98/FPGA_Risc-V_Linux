@@ -7,7 +7,7 @@ module rom(
 
 reg [`InstBus] mem [0:`InstMenNum];
 
-initial begin $readmemh("inst_rom.data",mem); end
+initial begin $readmemh("inst_rom.mem",mem); end
 
 always @(*) begin
     if (rom_ce_o == `ChipDisable) begin
