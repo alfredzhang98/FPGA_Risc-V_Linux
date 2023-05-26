@@ -3,6 +3,7 @@ all:
 	make connect
 	make get_rom
 	make translate
+	cp ./inst_rom.mem ./../sim/
 
 comp:
 	mips-sde-elf-as -mips32 inst_rom.S -o inst_rom.o
