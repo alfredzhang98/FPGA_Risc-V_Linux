@@ -1,0 +1,14 @@
+./../rtl/definitions.v
+./../rtl/mem.v
+./../rtl/if_id.v
+./../rtl/mem_wb.v
+./../rtl/hilo_reg.v
+./../rtl/pc_reg.v
+./../rtl/openmips.v
+./../rtl/ex_mem.v
+./../rtl/regfile.v
+./../rtl/id.v
+./../rtl/id_ex.v
+./../rtl/rom.v
+./../rtl/ex.v
+./../tb/tb_openmips.v
