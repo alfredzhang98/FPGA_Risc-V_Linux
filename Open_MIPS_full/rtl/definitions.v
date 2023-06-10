@@ -35,7 +35,7 @@
 
 `define EXE_SYNC            6'b001111       //The op3 code of "SYNC"
 `define EXE_PREF            6'b110011       //the op code of "PREF"
-`define EXE_SPECIAL_INST    6'b000000       //the op code of "SPECIAL"
+
 
 
 `define EXE_NOP             6'b000000       //The op code of "NOP"
@@ -47,8 +47,35 @@
 `define EXE_MFLO            6'b010010       //The op3 code of "MFLO"
 `define EXE_MTLO            6'b010011       //The op3 code of "MTLO"
 
+`define EXE_SLT             6'b101010       //The op3 code of "SLT"
+`define EXE_SLTU            6'b101011       //The op3 code of "SLTU"
+`define EXE_SLTI            6'b001010       //The op code of "SLTI"
+`define EXE_SLTIU           6'b001011       //The op code of "SLTIU"
+`define EXE_ADD             6'b100000       //The op3 code of "ADD"
+`define EXE_ADDU            6'b100001       //The op3 code of "ADDU"
+`define EXE_SUB             6'b100010       //The op3 code of "SUB"
+`define EXE_SUBU            6'b100011       //The op3 code of "SUBBU"
+`define EXE_ADDI            6'b001000       //The op code of "ADDI"
+`define EXE_ADDIU           6'b001001       //The op code of "ADDIU"
+`define EXE_CLZ             6'b100000       //The op3 code of "CLZ"
+`define EXE_CLO             6'b100001       //ThE op3 code of "CLO"
+
+`define EXE_MULT            6'b011000       //The op3 code of "MULT"
+`define EXE_MULTU           6'b011001       //The op3 code of "MULTU"
+`define EXE_MUL             6'b000010       //The op3 code of "MUL"
+`define EXE_MADD            6'b000000       //The op3 code of "MADD"
+`define EXE_MADDU           6'b000001       //The op3 code of "MADDU"
+`define EXE_MSUB            6'b000100       //The op3 code of "MSUB"
+`define EXE_MSUBU           6'b000101       //The op3 code of "MSUBU"
+
+`define EXE_DIV             6'b011010       //The op3 code of "DIV"
+`define EXE_DIVU            6'b011011       //The op3 code of "DIVU"
 
 
+
+`define EXE_SPECIAL_INST    6'b000000       //The op code of "SPECIAL"
+`define EXE_REGIMM_INST     6'b000001
+`define EXE_SPECIAL2_INST   6'b011100       //The op code of "SPECIAL2"
 
 
 //AluOp
@@ -73,11 +100,45 @@
 `define EXE_MTLO_OP         8'b00010011
 
 
+`define EXE_SLT_OP          8'b00101010
+`define EXE_SLTU_OP         8'b00101011
+`define EXE_SLTI_OP         8'b01010111
+`define EXE_SLTIU_OP        8'b01011000
+`define EXE_ADD_OP          8'b00100000
+`define EXE_ADDU_OP         8'b00100001
+`define EXE_SUB_OP          8'b00100010
+`define EXE_SUBU_OP         8'b00100011
+`define EXE_ADDI_OP         8'b01010101
+`define EXE_ADDIU_OP        8'b01010110
+`define EXE_CLZ_OP          8'b10110000
+`define EXE_CLO_OP          8'b10110001
+
+`define EXE_MULT_OP         8'b00011000
+`define EXE_MULTU_OP        8'b00011001
+`define EXE_MUL_OP          8'b10101001
+`define EXE_MADD_OP         8'b10100110
+`define EXE_MADDU_OP        8'b10101000
+`define EXE_MSUB_OP         8'b10101010
+`define EXE_MSUBU_OP        8'b10101011
+`define EXE_MADDU_OP        8'b10101000
+`define EXE_MSUB_OP         8'b10101010
+`define EXE_MSUBU_OP        8'b10101011
+
+`define EXE_DIV_OP          8'b00011010
+`define EXE_DIVU_OP         8'b00011011
+
+
 //AluSel
 `define EXE_RES_LOGIC       3'b001
 `define EXE_RES_SHIFT       3'b010
 `define EXE_RES_MOVE        3'b011
 `define EXE_RES_NOP         3'b000
+
+
+`define EXE_RES_ARITHMETIC 3'b100
+`define EXE_RES_MUL 3'b101
+
+
 
 //****************Global definitions ablout instruction ROM********************//
 `define InstAddrBus         31:0            //The width of address bus
@@ -97,3 +158,17 @@
 `define RegNumLog2          5               //The address width
 `define NOPRegAddr          5'b00000
 
+//**************Global definitions about pipeline ctrl************************//
+`define Stop                1'b1
+`define NoStop              1'b0
+
+
+//**************Global definitions about div*********************************//
+`define DivFree             2'b00
+`define DivByZero           2'b01
+`define DivOn               2'b10
+`define DivEnd              2'b11
+`define DivResultReady      1'b1
+`define DivResultNotReady   1'b0
+`define DivStart            1'b1
+`define DivStop             1'b0

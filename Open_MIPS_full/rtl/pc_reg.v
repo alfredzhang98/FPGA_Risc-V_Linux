@@ -1,7 +1,8 @@
 module pc_reg(
-    input                       clk,
-    input                       rst,
-    output reg [`InstAddrBus]   pc ,
+    input                       clk   ,
+    input                       rst   ,
+    input      [5:0]            stall ,
+    output reg [`InstAddrBus]   pc    ,
     output reg                  ce
     );
 
@@ -19,7 +20,7 @@ module pc_reg(
         if (ce == `ChipDisable) begin
             pc <= 32'h00000000;
         end
-        else begin
+        else if(stall[0] == `NoStop) begin
             pc <= pc + 32'h4;
         end
     end

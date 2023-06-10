@@ -12,7 +12,7 @@ module tb_openmips;
         rst = `RstEnalbe;
         #73;
         rst = `RstDisable;
-        #900;
+        #4500;
         $finish;
     end
 

@@ -3,11 +3,13 @@
 ./../rtl/if_id.v
 ./../rtl/mem_wb.v
 ./../rtl/hilo_reg.v
+./../rtl/ctrl.v
 ./../rtl/pc_reg.v
 ./../rtl/openmips.v
 ./../rtl/ex_mem.v
 ./../rtl/regfile.v
 ./../rtl/id.v
+./../rtl/div.v
 ./../rtl/id_ex.v
 ./../rtl/rom.v
 ./../rtl/ex.v
