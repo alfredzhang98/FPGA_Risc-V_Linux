@@ -1,16 +1,25 @@
    .org 0x0
+   .set noat
+   .set noreorder
+   .set nomacro
    .global _start
 _start:
-   ori  $2,$0,0xffff
-   sll  $2,$2,16
-   ori  $2,$2,0xfff1           # $2 = -15
-   ori  $3,$0,0x11             # $3 = 17
+   ori $1,$0,0x1234    # $1 = 0x00001234
+   sw  $1,0x0($0)      # [0x0] = 0x00001234
 
-   div $zero,$2,$3             # hi = 0xfffffff1
-                               # lo = 0x0
-   divu $zero,$2,$3            # hi = 0x00000003
-                               # lo = 0x0f0f0f0e
+   ori $2,$0,0x1234    # $2 = 0x00001234
+   ori $1,$0,0x0       # $1 = 0x0
+   lw  $1,0x0($0)      # $1 = 0x00001234
+   beq $1,$2,Label
+   nop
 
-   div  $zero,$3,$2            # hi = 2
-                               # lo = 0xffffffff
+   ori $1,$0,0x4567
+   nop
 
+Label:
+   ori $1,$0,0x89ab    # $1 = 0x000089ab
+   nop
+
+_loop:
+   j _loop
+   nop

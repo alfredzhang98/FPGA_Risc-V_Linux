@@ -15,6 +15,9 @@ module ex(
     input [`RegBus]                 reg2_i      ,
     input [`RegAddrBus]             wd_i        ,
     input                           wreg_i      ,
+    input [`RegBus]                 link_address_i,
+    input                           is_in_delayslot_i,
+    input [`RegBus]                 inst_i      ,
 
     //The temp value from ex_mem for MADD, MADDU, MSUB, MSUBU
     input [`DoubleRegBus]           hilo_temp_i ,
@@ -47,6 +50,9 @@ module ex(
     output reg [`RegBus]            hi_o        ,
     output reg [`RegBus]            lo_o        ,
     output reg                      whilo_o     ,
+    output [`AluOpBus]              aluop_o     ,
+    output [`RegBus]                mem_addr_o  ,
+    output [`RegBus]                reg2_o      ,
 
     //to ctrl
     output reg                      stallreq    ,
@@ -74,7 +80,7 @@ module ex(
 //  Part 9. The logic of controlling div module and stallreq_for_div
 //  Part 10. The logic of write back output
 //  Part 11. The mux of stallreq
-//
+//  Part 12. The logics of load (from) and save (to) ram
 //
 
 //***********Part 1. Definitions*************************//
@@ -539,6 +545,9 @@ module ex(
             `EXE_RES_MUL: begin
                 wdata_o = mulres[31:0];
             end
+            `EXE_RES_JUMP_BRANCH: begin
+                wdata_o = link_address_i;
+            end
             default: begin
                 wdata_o = `ZeroWord;
             end
@@ -552,7 +561,10 @@ module ex(
     end
 
 
-
+//****Part 12. The logics of load (from) and save (to) ram***//
+assign aluop_o = aluop_i;
+assign mem_addr_o = reg1_i +{{16{inst_i[15]}},inst_i[15:0]};
+assign reg2_o = reg2_i;
 
 endmodule
 

@@ -9,8 +9,10 @@
 ./../rtl/ex_mem.v
 ./../rtl/regfile.v
 ./../rtl/id.v
+./../rtl/data_ram.v
 ./../rtl/div.v
 ./../rtl/id_ex.v
+./../rtl/LLbit_reg.v
 ./../rtl/rom.v
 ./../rtl/ex.v
 ./../tb/tb_openmips.v
